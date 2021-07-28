@@ -53,3 +53,8 @@ li {
 .search-form {
   margin-bottom: 20px;
 }
+
+.search-button {
+  padding: 10px;
+  color: blue;
+}

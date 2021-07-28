@@ -52,6 +52,7 @@ function currentLocSearch(position) {
 }
 
 function showWeatherInfo(response) {
+  console.log(response.data);
   cityName = response.data.name;
   document.querySelector("#city").innerHTML = `${cityName}`;
   let temperature = Math.round(response.data.main.temp);
@@ -61,10 +62,6 @@ function showWeatherInfo(response) {
   document.querySelector("#weather-description").innerHTML = `${wdescription}`;
   let humidity = response.data.main.humidity;
   document.querySelector("#hum").innerHTML = `Humidity: ${humidity}%`;
-  let theWind = response.data.wind.gust;
-  if (theWind) {
-    document.querySelector("#wind").innerHTML = `Wind: ${theWind} mph`;
-  } else {
-    document.querySelector("#wind").innerHTML = `Wind: unknown mph`;
-  }
+  let rfeel = response.data.main.feels_like;
+  document.querySelector("#real-feel").innerHTML = `Real Feel: ${rfeel} °F`;
 }
