@@ -24,32 +24,25 @@ li {
   list-style: none;
 }
 
-.weather-app {
-  border: 1px solid #dadde1;
-  padding: 15px;
+.weather-app-wrapper {
+  max-width: 550px;
   margin: 20px auto;
-  border-radius: 10px;
-  max-width: 600px;
 }
 
-.weather-icon {
-  font-size: 90px;
-  margin: 0;
-  text-align: left;
+.weather-app {
+  border: 2px solid #dadde1;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.top-section {
+  text-align: center;
 }
 
 #weather-description {
   font-style: italic;
   color: rgb(117, 112, 112);
   line-height: 10px;
-}
-
-.temperature {
-  color: rgb(33, 33, 33);
-  font-size: 78px;
-  font-weight: 400;
-  text-align: right;
-  margin: 0;
 }
 
 .units {
@@ -61,14 +54,50 @@ li {
   margin-bottom: 20px;
 }
 
+.search {
+  margin: 0;
+  padding-right: 0;
+}
+
 .changeUnit {
   font-size: 20px;
   text-align: right;
 }
 
 .locate-btn {
-  font-size: 12px;
-  padding: 3px;
+  font-size: 15px;
+  padding: 7px;
+}
+
+.weather-icon {
+  font-size: 80px;
+  margin-left: 0px;
+  text-align: right;
+}
+
+.temperature {
+  color: rgb(33, 33, 33);
+  font-size: 78px;
+  font-weight: 400;
+  text-align: center;
+  margin-left: 0px;
+  line-height: 100px;
+}
+
+.temperature .unit {
+  position: relative;
+  font-size: 35px;
+  top: -28px;
+}
+
+.middle-section .hi-lo {
+  position: relative;
+  top: 40px;
+  font-size: 14px;
+}
+
+.hi-lo {
+  text-align: right;
 }
 
 .wspec-img {
@@ -82,19 +111,10 @@ li {
 
 #wspec-words {
   font-size: 10px;
-  font-family: Georgia, "Times New Roman", Times, serif;
-}
-
-.hi-lo {
-  font-size: 10px;
-}
-
-.hilo {
-  text-align: right;
-  line-height: 0;
-  margin-bottom: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(133, 130, 130);
 }
 
 .foot {
-  text-align: center;
+  float: right;
 }
