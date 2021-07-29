@@ -2,12 +2,12 @@ body {
   font-family: arial, sans-serif;
 }
 
-h1 {
-  color: #7c7c7c;
-  font-size: 24px;
+.city {
+  color: rgb(18, 18, 143);
+  font-size: 50px;
   font-weight: 100;
   line-height: 28px;
-  margin: 0;
+  margin-bottom: 20px;
 }
 
 ul {
@@ -33,16 +33,23 @@ li {
 }
 
 .weather-icon {
-  height: 64px;
-  width: 64px;
-  margin-right: 10px;
+  font-size: 90px;
+  margin: 0;
+  text-align: left;
+}
+
+#weather-description {
+  font-style: italic;
+  color: rgb(117, 112, 112);
+  line-height: 10px;
 }
 
 .temperature {
   color: rgb(33, 33, 33);
-  font-size: 64px;
+  font-size: 78px;
   font-weight: 400;
-  line-height: 1;
+  text-align: right;
+  margin: 0;
 }
 
 .units {
@@ -52,6 +59,40 @@ li {
 
 .search-form {
   margin-bottom: 20px;
+}
+
+.changeUnit {
+  font-size: 20px;
+  text-align: right;
+}
+
+.locate-btn {
+  font-size: 12px;
+  padding: 3px;
+}
+
+.wspec-img {
+  margin: 0px;
+}
+
+.weather-specifics {
+  text-align: center;
+  font-size: 14px;
+}
+
+#wspec-words {
+  font-size: 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.hi-lo {
+  font-size: 10px;
+}
+
+.hilo {
+  text-align: right;
+  line-height: 0;
+  margin-bottom: 30px;
 }
 
 .foot {
