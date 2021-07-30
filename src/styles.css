@@ -43,8 +43,10 @@ ul {
 }
 
 .changeUnit {
-  font-size: 20px;
+  font-size: 15px;
   text-align: right;
+  line-height: 20px;
+  margin: 0;
 }
 
 .locate-btn {
@@ -64,11 +66,6 @@ ul {
   text-align: right;
   list-style: none;
   margin-left: 0;
-}
-
-.city,
-.dateTime {
-  line-height: 50px;
 }
 
 .city {
