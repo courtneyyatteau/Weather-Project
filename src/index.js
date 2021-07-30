@@ -6,8 +6,12 @@ let long = 0.0;
 let cityName = "name";
 
 function dateTime(response) {
-  let time = response.data.timestamp;
-  let d = new Date(time * 1000);
+  let info = response.data.datetime;
+  let indexSpace = info.indexOf(" ");
+  let time = info.slice(indexSpace, info.length - 3);
+  document.getElementById("dateTime").innerHTML = time;
+
+  /*let d = new Date(time * 1000);
   let days = [
     "Sunday",
     "Monday",
@@ -25,7 +29,7 @@ function dateTime(response) {
   if (min < 10) {
     min = "0" + min;
   }
-  document.getElementById("dateTime").innerHTML = `${day} ${hour}:${min}`;
+  document.getElementById("dateTime").innerHTML = `${day} ${hour}:${min}`;*/
 }
 
 let form = document.querySelector("#form");
@@ -63,11 +67,11 @@ function showWeatherInfo(response) {
   let timeInfo = response.data.dt * 1000;
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
-  let apiKeyTZ = "L60Y87X0VPSV";
+  let apiKeyTZ = "3ae99f7a70154b41a980cb925a17a548";
 
   axios
     .get(
-      `http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKeyTZ}&format=json&by=position&lat=${lat}&lng=${lon}`
+      `https://timezone.abstractapi.com/v1/current_time/?api_key=${apiKeyTZ}&location=${lat},${lon}`
     )
     .then(dateTime);
 
@@ -77,6 +81,9 @@ function showWeatherInfo(response) {
   let temperature = Math.round(response.data.main.temp);
   let tempElement = document.querySelector("#currTemp");
   tempElement.innerHTML = `${temperature}`;
+
+  //high
+  //low
 
   let rfeel = Math.round(response.data.main.feels_like);
   document.querySelector("#real-feel").innerHTML = `${rfeel}`;
