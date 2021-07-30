@@ -28,6 +28,10 @@ ul {
   line-height: 10px;
 }
 
+#weather-description:first-letter {
+  text-transform: capitalize;
+}
+
 .units {
   position: relative;
   top: -34px;

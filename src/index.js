@@ -14,26 +14,6 @@ function dateTime(response) {
 
   let time = info.slice(indexSpace, info.length - 3);
   document.getElementById("theTime").innerHTML = time;
-
-  /*let d = new Date(time * 1000);
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  let day = days[d.getDay()];
-
-  let hour = d.getHours();
-  let min = d.getMinutes();
-  if (min < 10) {
-    min = "0" + min;
-  }
-  document.getElementById("dateTime").innerHTML = `${day} ${hour}:${min}`;*/
 }
 
 let form = document.querySelector("#form");
@@ -65,7 +45,7 @@ function currentLocSearch(position) {
 }
 
 function showWeatherInfo(response) {
-  //console.log(response.data);
+  console.log(response.data);
   cityName = response.data.name;
   document.querySelector("#city").innerHTML = `${cityName}`;
   let timeInfo = response.data.dt * 1000;
@@ -79,15 +59,18 @@ function showWeatherInfo(response) {
     )
     .then(dateTime);
 
-  let wdescription = response.data.weather[0].main;
+  let wdescription = response.data.weather[0].description;
   document.querySelector("#weather-description").innerHTML = `${wdescription}`;
 
   let temperature = Math.round(response.data.main.temp);
   let tempElement = document.querySelector("#currTemp");
   tempElement.innerHTML = `${temperature}`;
 
-  //high
-  //low
+  let high = Math.round(response.data.main.temp_max);
+  document.querySelector("#hi").innerHTML = `${high}`;
+
+  let low = Math.round(response.data.main.temp_min);
+  document.querySelector("#lo").innerHTML = `${low}`;
 
   let rfeel = Math.round(response.data.main.feels_like);
   document.querySelector("#real-feel").innerHTML = `${rfeel}`;
