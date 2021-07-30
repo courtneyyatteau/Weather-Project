@@ -48,7 +48,7 @@ ul {
 
 .changeUnit {
   font-size: 15px;
-  text-align: right;
+  text-align: center;
   line-height: 20px;
   margin: 0;
 }
@@ -84,9 +84,13 @@ ul {
 }
 
 .weather-icon {
-  font-size: 80px;
   margin-left: 0px;
   text-align: right;
+  line-height: 100px;
+}
+
+#weatherIcon {
+  width: 120px;
 }
 
 .temperature {
@@ -106,12 +110,27 @@ ul {
 
 .middle-section .hi-lo {
   position: relative;
-  top: 40px;
-  font-size: 14px;
+  top: 25px;
+  font-size: 13px;
 }
 
 .hi-lo {
   text-align: right;
+}
+
+.sr-time,
+.ss-time {
+  margin-bottom: 0;
+}
+
+.sr-words,
+.ss-words {
+  font-size: 8px;
+  margin-top: 0;
+}
+
+.sr-words {
+  margin-bottom: 8px;
 }
 
 .wspec-img {

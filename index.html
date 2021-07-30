@@ -64,15 +64,23 @@
           </div>
 
           <div class="row middle-section">
-            <div class="col-5 weather-icon">⛅</div>
-            <div class="col-3">
+            <div class="col-md-5 col-4 weather-icon">
+              <img src="https://webstockreview.net/images/cloudy-clipart-1.jpg" id="weatherIcon"></img>
+            </div>
+            <div class="col-md-3 col-4">
               <div class="temperature">
                 <span id="currTemp">82</span><span class="unit">°F</span>
               </div>
             </div>
             <div class="col-4 hi-lo">
-              <div><span id="hi">86</span>° high</div>
-              <div><span id="lo">75</span>° low</div>
+              <div>
+                <span>🌅 </span><span id="sr" class="sr-time">08:10</span><br />
+                <div class="sr-words">Sunrise</div>
+              </div>
+              <div>
+                <span>🌇 </span><span id="ss" class="ss-time">20:02</span><br />
+                <div class="ss-words">Sunset</div>
+              </div>
             </div>
           </div>
 
@@ -82,14 +90,14 @@
               <div id="wspec-words">REAL FEEL</div>
             </div>
             <div class="col-3 wspec-img">
-              <span>💧 </span>66%
+              <span>💧 </span><span id="precip">0.25</span><span>in</span>
               <div id="wspec-words">PRECIPITATION</div>
             </div>
-            <div class="col-3 wspec-img" id="real-feel">
-              <span>🏳️ </span> 5mph
+            <div class="col-3 wspec-img">
+              <span>🏳️ </span> <span id="windsp">5</span>mph
               <div id="wspec-words">WIND</div>
             </div>
-            <div class="col-3 wspec-img" id="real-feel">
+            <div class="col-3 wspec-img">
               <span>💦 <span id="hum">66</span>%</span>
               <div id="wspec-words">HUMIDITY</div>
             </div>

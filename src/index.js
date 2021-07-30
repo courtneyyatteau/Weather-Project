@@ -1,5 +1,5 @@
-let apiKey = "eb3465c9163b23fae63aa1202c8a0eb5";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?`;
+let apiKey = "3e16368d310a4a748a9140941213007";
+let apiUrl = `https://api.weatherapi.com/v1/current.json?`;
 let units = "imperial";
 let lat = 0.0;
 let long = 0.0;
@@ -24,9 +24,7 @@ function searching(event) {
   let searchVal = document.querySelector("#search");
   cityName = searchVal.value;
   document.querySelector("#city").innerHTML = `${cityName}`;
-  axios
-    .get(`${apiUrl}q=${cityName}&appid=${apiKey}&units=${units}`)
-    .then(showWeatherInfo);
+  axios.get(`${apiUrl}key=${apiKey}&q=${cityName}`).then(showWeatherInfo);
 }
 
 let searchLocationButton = document.querySelector("#currentLocationButton");
@@ -39,18 +37,39 @@ function startGeoLoc() {
 function currentLocSearch(position) {
   lat = position.coords.latitude;
   long = position.coords.longitude;
-  axios
-    .get(`${apiUrl}lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`)
-    .then(showWeatherInfo);
+  axios.get(`${apiUrl}key=${apiKey}&q=${lat},${long}`).then(showWeatherInfo);
+}
+
+function wIcon(response) {
+  console.log(response);
+  let weatherImage = document.querySelector("#weatherIcon");
+  weatherImage.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+}
+
+function sunInfo(response) {
+  let sunRiseTimeStamp = Math.round(response.data.sys.sunrise);
+  let sunrise = calculateTime(sunRiseTimeStamp);
+  document.querySelector("#sr").innerHTML = `${sunrise}`;
+
+  let sunSetTimeStamp = Math.round(response.data.sys.sunset);
+  let sunset = calculateTime(sunSetTimeStamp);
+  document.querySelector("#ss").innerHTML = `${sunset}`;
+}
+
+function realFeel(response) {
+  let rfeel = Math.round(response.data.main.feels_like);
+  document.querySelector("#real-feel").innerHTML = `${rfeel}`;
 }
 
 function showWeatherInfo(response) {
-  console.log(response.data);
-  cityName = response.data.name;
+  console.log(response);
+  cityName = response.data.location.name;
   document.querySelector("#city").innerHTML = `${cityName}`;
-  let timeInfo = response.data.dt * 1000;
-  let lat = response.data.coord.lat;
-  let lon = response.data.coord.lon;
+  let lat = response.data.location.lat;
+  let lon = response.data.location.lon;
   let apiKeyTZ = "3ae99f7a70154b41a980cb925a17a548";
 
   axios
@@ -59,26 +78,37 @@ function showWeatherInfo(response) {
     )
     .then(dateTime);
 
-  let wdescription = response.data.weather[0].description;
-  document.querySelector("#weather-description").innerHTML = `${wdescription}`;
-
-  let temperature = Math.round(response.data.main.temp);
+  let temperature = Math.round(response.data.current.temp_f);
   let tempElement = document.querySelector("#currTemp");
   tempElement.innerHTML = `${temperature}`;
 
-  let high = Math.round(response.data.main.temp_max);
-  document.querySelector("#hi").innerHTML = `${high}`;
+  let apiKey = "eb3465c9163b23fae63aa1202c8a0eb5";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
 
-  let low = Math.round(response.data.main.temp_min);
-  document.querySelector("#lo").innerHTML = `${low}`;
+  let wdescription = response.data.current.condition.text;
+  document.querySelector("#weather-description").innerHTML = `${wdescription}`;
 
-  let rfeel = Math.round(response.data.main.feels_like);
-  document.querySelector("#real-feel").innerHTML = `${rfeel}`;
+  axios.get(`${apiUrl}`).then(wIcon);
+  axios.get(`${apiUrl}`).then(sunInfo);
+  axios.get(`${apiUrl}`).then(realFeel);
 
-  //precipitation
+  let prec = response.data.current.precip_in;
+  document.querySelector("#precip").innerHTML = `${prec}`;
 
-  //wind
+  let wind = Math.round(response.data.current.wind_mph);
+  document.querySelector("#windsp").innerHTML = `${wind}`;
 
-  let humidity = response.data.main.humidity;
+  let humidity = response.data.current.humidity;
   document.querySelector("#hum").innerHTML = `${humidity}`;
+}
+
+function calculateTime(timeStamp) {
+  let d = new Date(timeStamp * 1000);
+  let hour = d.getHours();
+  let min = d.getMinutes();
+  if (min < 10) {
+    min = "0" + min;
+  }
+
+  return `${hour}:${min}`;
 }
