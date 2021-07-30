@@ -54,6 +54,10 @@ ul {
   padding: 7px;
 }
 
+.second-row {
+  margin-bottom: 10px;
+}
+
 .city {
   color: rgb(18, 18, 143);
   font-size: 50px;

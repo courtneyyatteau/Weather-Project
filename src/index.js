@@ -8,8 +8,12 @@ let cityName = "name";
 function dateTime(response) {
   let info = response.data.datetime;
   let indexSpace = info.indexOf(" ");
+
+  let date = info.slice(0, indexSpace);
+  document.getElementById("theDate").innerHTML = date;
+
   let time = info.slice(indexSpace, info.length - 3);
-  document.getElementById("dateTime").innerHTML = time;
+  document.getElementById("theTime").innerHTML = time;
 
   /*let d = new Date(time * 1000);
   let days = [
