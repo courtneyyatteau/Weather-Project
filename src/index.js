@@ -30,7 +30,8 @@ function searching(event) {
 let searchLocationButton = document.querySelector("#currentLocationButton");
 searchLocationButton.addEventListener("click", startGeoLoc);
 
-function startGeoLoc() {
+function startGeoLoc(event) {
+  event.preventDefault();
   navigator.geolocation.getCurrentPosition(currentLocSearch);
 }
 
