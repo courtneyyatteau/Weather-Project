@@ -5,30 +5,31 @@ let lat = 0.0;
 let long = 0.0;
 let cityName = "name";
 
-let d = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[d.getDay()];
+function dateTime(response) {
+  let time = response.data.timestamp;
+  let d = new Date(time * 1000);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-let hour = d.getHours();
-let min = d.getMinutes();
-if (min < 10) {
-  min = "0" + min;
+  let day = days[d.getDay()];
+
+  let hour = d.getHours();
+  let min = d.getMinutes();
+  if (min < 10) {
+    min = "0" + min;
+  }
+  document.getElementById("dateTime").innerHTML = `${day} ${hour}:${min}`;
 }
-
-document.getElementById("dateTime").innerHTML = `${day} ${hour}:${min}`;
 
 let form = document.querySelector("#form");
 form.addEventListener("submit", searching);
-let searchLocationButton = document.querySelector("#currentLocationButton");
-searchLocationButton.addEventListener("click", startGeoLoc);
 
 function searching(event) {
   event.preventDefault();
@@ -39,6 +40,10 @@ function searching(event) {
     .get(`${apiUrl}q=${cityName}&appid=${apiKey}&units=${units}`)
     .then(showWeatherInfo);
 }
+
+let searchLocationButton = document.querySelector("#currentLocationButton");
+searchLocationButton.addEventListener("click", startGeoLoc);
+
 function startGeoLoc() {
   navigator.geolocation.getCurrentPosition(currentLocSearch);
 }
@@ -52,16 +57,34 @@ function currentLocSearch(position) {
 }
 
 function showWeatherInfo(response) {
-  console.log(response.data);
+  //console.log(response.data);
   cityName = response.data.name;
   document.querySelector("#city").innerHTML = `${cityName}`;
-  let temperature = Math.round(response.data.main.temp);
-  let tempElement = document.querySelector("#currTemp");
-  tempElement.innerHTML = `${temperature}°F`;
+  let timeInfo = response.data.dt * 1000;
+  let lat = response.data.coord.lat;
+  let lon = response.data.coord.lon;
+  let apiKeyTZ = "L60Y87X0VPSV";
+
+  axios
+    .get(
+      `http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKeyTZ}&format=json&by=position&lat=${lat}&lng=${lon}`
+    )
+    .then(dateTime);
+
   let wdescription = response.data.weather[0].main;
   document.querySelector("#weather-description").innerHTML = `${wdescription}`;
+
+  let temperature = Math.round(response.data.main.temp);
+  let tempElement = document.querySelector("#currTemp");
+  tempElement.innerHTML = `${temperature}`;
+
+  let rfeel = Math.round(response.data.main.feels_like);
+  document.querySelector("#real-feel").innerHTML = `${rfeel}`;
+
+  //precipitation
+
+  //wind
+
   let humidity = response.data.main.humidity;
-  document.querySelector("#hum").innerHTML = `Humidity: ${humidity}%`;
-  let rfeel = response.data.main.feels_like;
-  document.querySelector("#real-feel").innerHTML = `Real Feel: ${rfeel} °F`;
+  document.querySelector("#hum").innerHTML = `${humidity}`;
 }

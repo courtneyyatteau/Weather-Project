@@ -7,15 +7,6 @@ ul {
   padding: 0;
 }
 
-li {
-  color: #7c7c7c;
-  font-size: 16px;
-  font-weight: 100;
-  height: 19px;
-  line-height: 1;
-  list-style: none;
-}
-
 .weather-app-wrapper {
   max-width: 550px;
   margin: 20px auto;
@@ -69,15 +60,21 @@ li {
   margin-bottom: 25px;
 }
 
-#dateTime {
+.dateTime {
   text-align: right;
+  list-style: none;
+  margin-left: 0;
+}
+
+.city,
+.dateTime {
+  line-height: 50px;
 }
 
 .city {
   color: rgb(18, 18, 143);
   font-size: 50px;
   font-weight: 100;
-  line-height: 28px;
   margin-bottom: 20px;
 }
 
