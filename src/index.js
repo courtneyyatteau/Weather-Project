@@ -17,7 +17,7 @@ function dateTime(response) {
 }
 
 let form = document.querySelector("#form");
-form.addEventListener("submit", searching);
+form.addEventListener("click", searching);
 
 function searching(event) {
   event.preventDefault();
@@ -142,8 +142,6 @@ function showCelsius(event) {
   let celTemp = Math.round((fTemp - 32) / 1.8);
   document.querySelector("#currTemp").innerHTML = celTemp;
   document.querySelector("#unit-type").innerHTML = "C";
-  flink.classList.remove("active");
-  clink.classList.add("active");
 }
 
 let clink = document.querySelector("#c-link");
@@ -153,8 +151,7 @@ function showFahrenheit(event) {
   event.preventDefault();
   document.querySelector("#currTemp").innerHTML = fTemp;
   document.querySelector("#unit-type").innerHTML = "F";
-  clink.classList.remove("active");
-  flink.classList.add("active");
+  flink.classList.remove("active");
 }
 
 let flink = document.querySelector("#f-link");

@@ -41,9 +41,17 @@ ul {
   margin-bottom: 20px;
 }
 
+.locate-btn {
+  margin-left: -8px;
+}
+
 .search {
   margin: 0;
   padding-right: 0;
+}
+
+.s-btn {
+  margin-left: -7px;
 }
 
 .changeUnit {
