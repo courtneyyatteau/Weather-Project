@@ -21,9 +21,7 @@
           <form class="search-form" id="form">
             <div class="row top-section">
               <div class="col-2" id="currentLocationButton" class="locate-ctn">
-                <button class="btn btn-success shadow-sm locate-btn">
-                  Local
-                </button>
+                <input class="btn btn-success shadow-sm locate-btn" value="Local" type="submit"/>
               </div>
               <div class="col-7 search">
                 <input
@@ -45,31 +43,31 @@
             </div>
           </form>
           <div class="row second-row">
-            <h1 class="city col-8" id="city">Alexandria</h1>
+            <h1 class="city col-8" id="city"></h1>
             <div class="col-4">
               <div class="row">
                 <div class="col-12 dateTime">
-                  <span id="theDate">05-20-2019</span><br />
-                  <span id="theTime">10:56</span>
+                  <span id="theDate"></span><br />
+                  <span id="theTime"></span>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-8" id="weather-description">Mostly Cloudy</div>
+            <div class="col-8" id="weather-description"></div>
             <div class="col-4 changeUnit">
-              <a href="">°F</a>|<a href="">°C</a>
+              <a href="#" id="f-link" class="active"></a><span id="line"></span><a href="#" id="c-link"></a>
             </div>
           </div>
 
           <div class="row middle-section">
             <div class="col-6 weather-icon">
-              <img src="https://webstockreview.net/images/cloudy-clipart-1.jpg" id="weatherIcon"></img>
+              <img src="" id="weatherIcon"></img>
             </div>
             <div class="col-md-3 col-4">
               <div class="temperature">
-                <span id="currTemp">82</span><span class="unit">°F</span>
+                <span id="currTemp"></span><span class="unit" id="degree"><span id="unit-type"></span></span>
               </div>
             </div>
             <!--<div class="col-4 hi-lo">
@@ -86,20 +84,24 @@
 
           <div class="row weather-specifics">
             <div class="col-3 wspec-img">
-              <span>🌡️ <span id="real-feel">91</span>°F</span>
-              <div id="wspec-words">REAL FEEL</div>
+              <span id="thermometer"></span>
+              <span id="real-feel"></span>
+              <span id="rf"></span>
+              <div class="wspec-words" id="realfeel"></div>
             </div>
             <div class="col-3 wspec-img">
-              <span>💧 </span><span id="precip">0.25</span><span>in</span>
-              <div id="wspec-words">PRECIPITATION</div>
+              <span id="drop"></span><span id="precip"></span><span id="inch"></span>
+              <div class="wspec-words" id="pr"></div>
             </div>
             <div class="col-3 wspec-img">
-              <span>🏳️ </span> <span id="windsp">5</span><span class="mph">mph</span>
-              <div id="wspec-words">WIND</div>
+              <span id="flag"></span> <span id="windsp"></span><span class="mph" id="mph"></span>
+              <div class="wspec-words" id="wind"></div>
             </div>
             <div class="col-3 wspec-img">
-              <span>💦 <span id="hum">66</span>%</span>
-              <div id="wspec-words">HUMIDITY</div>
+              <span id="drops"></span>
+              <span><span id="hum"></span></span>
+              <span id="percent"></span>
+              <div class="wspec-words" id="humidity"></div>
             </div>
           </div>
         </div>

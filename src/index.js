@@ -63,6 +63,9 @@ function sunInfo(response) {
 function realFeel(response) {
   let rfeel = Math.round(response.data.main.feels_like);
   document.querySelector("#real-feel").innerHTML = `${rfeel}`;
+  document.querySelector("#thermometer").innerHTML = "🌡️ ";
+  document.querySelector("#rf").innerHTML = "°F";
+  document.querySelector("#realfeel").innerHTML = "REAL FEEL";
 }
 
 function showWeatherInfo(response) {
@@ -72,6 +75,8 @@ function showWeatherInfo(response) {
   let lat = response.data.location.lat;
   let lon = response.data.location.lon;
   let apiKeyTZ = "3ae99f7a70154b41a980cb925a17a548";
+
+  fTemp = Math.round(response.data.current.temp_f);
 
   axios
     .get(
@@ -95,12 +100,30 @@ function showWeatherInfo(response) {
 
   let prec = response.data.current.precip_in;
   document.querySelector("#precip").innerHTML = `${prec}`;
+  document.querySelector("#drop").innerHTML = "💧 ";
+  document.querySelector("#inch").innerHTML = "in";
+  document.querySelector("#pr").innerHTML = "PRECIPITATION";
 
   let wind = Math.round(response.data.current.wind_mph);
   document.querySelector("#windsp").innerHTML = `${wind}`;
+  document.querySelector("#flag").innerHTML = "🏳️ ";
+  document.querySelector("#mph").innerHTML = "mph";
+  document.querySelector("#wind").innerHTML = "WIND";
 
   let humidity = response.data.current.humidity;
   document.querySelector("#hum").innerHTML = `${humidity}`;
+  document.querySelector("#drops").innerHTML = "💦 ";
+  document.querySelector("#percent").innerHTML = "%";
+  document.querySelector("#humidity").innerHTML = "HUMIDITY";
+  showIcons();
+}
+
+function showIcons() {
+  document.querySelector("#f-link").innerHTML = "°F";
+  document.querySelector("#line").innerHTML = "|";
+  document.querySelector("#c-link").innerHTML = "°C";
+  document.querySelector("#degree").innerHTML = "°";
+  document.querySelector("#unit-type").innerHTML = "F";
 }
 
 function calculateTime(timeStamp) {
@@ -113,3 +136,28 @@ function calculateTime(timeStamp) {
 
   return `${hour}:${min}`;
 }
+
+function showCelsius(event) {
+  event.preventDefault();
+  let celTemp = Math.round((fTemp - 32) / 1.8);
+  document.querySelector("#currTemp").innerHTML = celTemp;
+  document.querySelector("#unit-type").innerHTML = "C";
+  flink.classList.remove("active");
+  clink.classList.add("active");
+}
+
+let clink = document.querySelector("#c-link");
+clink.addEventListener("click", showCelsius);
+
+function showFahrenheit(event) {
+  event.preventDefault();
+  document.querySelector("#currTemp").innerHTML = fTemp;
+  document.querySelector("#unit-type").innerHTML = "F";
+  clink.classList.remove("active");
+  flink.classList.add("active");
+}
+
+let flink = document.querySelector("#f-link");
+flink.addEventListener("click", showFahrenheit);
+
+let fTemp = null;
