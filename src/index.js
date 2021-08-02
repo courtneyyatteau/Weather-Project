@@ -119,9 +119,9 @@ function showWeatherInfo(response) {
 }
 
 function showIcons() {
-  document.querySelector("#f-link").innerHTML = "°F";
+  document.querySelector("#flink").innerHTML = "°F";
   document.querySelector("#line").innerHTML = "|";
-  document.querySelector("#c-link").innerHTML = "°C";
+  document.querySelector("#clink").innerHTML = "°C";
   document.querySelector("#degree").innerHTML = "°";
   document.querySelector("#unit-type").innerHTML = "F";
 }
@@ -139,22 +139,25 @@ function calculateTime(timeStamp) {
 
 function showCelsius(event) {
   event.preventDefault();
+  flink.classList.remove("active");
+  clink.classList.add("active");
   let celTemp = Math.round((fTemp - 32) / 1.8);
   document.querySelector("#currTemp").innerHTML = celTemp;
   document.querySelector("#unit-type").innerHTML = "C";
 }
 
-let clink = document.querySelector("#c-link");
+let clink = document.querySelector("#clink");
 clink.addEventListener("click", showCelsius);
 
 function showFahrenheit(event) {
   event.preventDefault();
+  flink.classList.add("active");
+  clink.classList.remove("active");
   document.querySelector("#currTemp").innerHTML = fTemp;
   document.querySelector("#unit-type").innerHTML = "F";
-  flink.classList.remove("active");
 }
 
-let flink = document.querySelector("#f-link");
+let flink = document.querySelector("#flink");
 flink.addEventListener("click", showFahrenheit);
 
 let fTemp = null;
