@@ -118,6 +118,14 @@ ul {
   position: relative;
   font-size: 35px;
   top: -28px;
+  left: -20px;
+}
+
+.temperature .unitType {
+  position: relative;
+  left: -38px;
+  font-size: 35px;
+  top: -28px;
 }
 
 .middle-section .hi-lo {

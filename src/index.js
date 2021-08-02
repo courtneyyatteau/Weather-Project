@@ -42,7 +42,7 @@ function currentLocSearch(position) {
 }
 
 function wIcon(response) {
-  console.log(response);
+  //console.log(response);
   let weatherImage = document.querySelector("#weatherIcon");
   weatherImage.setAttribute(
     "src",
@@ -50,7 +50,7 @@ function wIcon(response) {
   );
 }
 
-function sunInfo(response) {
+/*function sunInfo(response) {
   let sunRiseTimeStamp = Math.round(response.data.sys.sunrise);
   let sunrise = calculateTime(sunRiseTimeStamp);
   document.querySelector("#sr").innerHTML = `${sunrise}`;
@@ -58,10 +58,12 @@ function sunInfo(response) {
   let sunSetTimeStamp = Math.round(response.data.sys.sunset);
   let sunset = calculateTime(sunSetTimeStamp);
   document.querySelector("#ss").innerHTML = `${sunset}`;
-}
+}*/
+
+let rfeel = 10;
 
 function realFeel(response) {
-  let rfeel = Math.round(response.data.main.feels_like);
+  rfeel = Math.round(response.data.main.feels_like);
   document.querySelector("#real-feel").innerHTML = `${rfeel}`;
   document.querySelector("#thermometer").innerHTML = "🌡️ ";
   document.querySelector("#rf").innerHTML = "°F";
@@ -69,7 +71,7 @@ function realFeel(response) {
 }
 
 function showWeatherInfo(response) {
-  console.log(response);
+  //console.log(response);
   cityName = response.data.location.name;
   document.querySelector("#city").innerHTML = `${cityName}`;
   let lat = response.data.location.lat;
@@ -95,7 +97,7 @@ function showWeatherInfo(response) {
   document.querySelector("#weather-description").innerHTML = `${wdescription}`;
 
   axios.get(`${apiUrl}`).then(wIcon);
-  axios.get(`${apiUrl}`).then(sunInfo);
+  //axios.get(`${apiUrl}`).then(sunInfo);
   axios.get(`${apiUrl}`).then(realFeel);
 
   let prec = response.data.current.precip_in;
