@@ -70,6 +70,32 @@ function realFeel(response) {
   document.querySelector("#realfeel").innerHTML = "REAL FEEL";
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="forecastTitle">4-Day Forecast
+  </div><div class="row">`;
+
+  let days = ["Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-3 dayOne">
+      <span class="forecastDay" id="dayOneWords">${day}</span>
+      <div>
+        <img class="forecastImg" src="http://openweathermap.org/img/wn/01d@2x.png" alt="sun" id="dayOneImg">
+      </div>
+      <div class="forecastTemps">
+        <span class="forecastHigh" id="dayTwoLo">82°▲</span>
+        <span class="forecastLow" id="dayOneLo"> 71°▼</span>
+      </div>
+    </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showWeatherInfo(response) {
   //console.log(response);
   cityName = response.data.location.name;
@@ -118,6 +144,8 @@ function showWeatherInfo(response) {
   document.querySelector("#percent").innerHTML = "%";
   document.querySelector("#humidity").innerHTML = "HUMIDITY";
   showIcons();
+
+  displayForecast();
 }
 
 function showIcons() {
