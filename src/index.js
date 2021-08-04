@@ -4,6 +4,8 @@ let units = "imperial";
 let lat = 0.0;
 let long = 0.0;
 let cityName = "name";
+let apiKeyOpen = "eb3465c9163b23fae63aa1202c8a0eb5";
+let apiOneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?`;
 
 function dateTime(response) {
   let info = response.data.datetime;
@@ -60,8 +62,6 @@ function wIcon(response) {
   document.querySelector("#ss").innerHTML = `${sunset}`;
 }*/
 
-let rfeel = 10;
-
 function realFeel(response) {
   rfeel = Math.round(response.data.main.feels_like);
   document.querySelector("#real-feel").innerHTML = `${rfeel}`;
@@ -77,6 +77,19 @@ function formatDay(dayUnformatted) {
   return days[day];
 }
 
+function convertFToC(fahrTemp) {
+  let celTemp = Math.round((fahrTemp - 32) / 1.8);
+  return celTemp;
+}
+
+function convertCToF(celTemp) {
+  let fahTemp = Math.round(celTemp * 1.8) + 32;
+  return fahTemp;
+}
+
+let forecastHigh = null;
+let forecastLow = null;
+
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -84,30 +97,49 @@ function displayForecast(response) {
   let forecastHTML = `<div class="forecastTitle">6-Day Forecast
   </div><div class="row">`;
 
-  forecast.forEach(function (forecastDay, i) {
+  for (let i = 0; i < 6; i++) {
+    let forecastDay = forecast[i];
+    forecastHigh = Math.round(forecastDay.temp.max);
+    forecastLow = Math.round(forecastDay.temp.min);
+    forecastHTML += `<div class="col-2 dayOne">
+          <span class="forecastDay" id="dayOneWords">${formatDay(
+            forecastDay.dt
+          )}</span>
+          <div>
+              <img class="forecastImg" src="http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png" alt="sun" id="dayOneImg">
+          </div>
+          <div class="forecastTemps">
+              <span class="forecastHigh" id="dayOneHi">${forecastHigh}</span><span>°▲</span>
+              <span class="forecastLow" id="dayOneLo"> ${forecastLow}</span><span>°▼</span>
+          </div>
+        </div>
+      `;
+  }
+
+  /*forecast.forEach(function (forecastDay, i) {
     if (i < 6) {
+      forecastHigh = Math.round(forecastDay.temp.max);
+      forecastLow = Math.round(forecastDay.temp.min);
       forecastHTML =
         forecastHTML +
         `<div class="col-2 dayOne">
-        <span class="forecastDay" id="dayOneWords">${formatDay(
-          forecastDay.dt
-        )}</span>
-        <div>
-          <img class="forecastImg" src="http://openweathermap.org/img/wn/${
-            forecastDay.weather[0].icon
-          }@2x.png" alt="sun" id="dayOneImg">
-        </div>
-        <div class="forecastTemps">
-          <span class="forecastHigh" id="dayTwoLo">${Math.round(
-            forecastDay.temp.max
-          )}°▲</span>
-          <span class="forecastLow" id="dayOneLo"> ${Math.round(
-            forecastDay.temp.min
-          )}°▼</span>
-        </div>
-      </div>`;
+          <span class="forecastDay" id="dayOneWords">${formatDay(
+            forecastDay.dt
+          )}</span>
+          <div>
+            <img class="forecastImg" src="http://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png" alt="sun" id="dayOneImg">
+          </div>
+          <div class="forecastTemps">
+            <span class="forecastHigh" id="dayOneHi">${forecastHigh}</span><span>°▲</span>
+            <span class="forecastLow" id="dayOneLo"> ${forecastLow}</span><span>°▼</span>
+          </div>
+        </div>`;
     }
-  });
+  });*/
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
@@ -117,15 +149,15 @@ function showWeatherInfo(response) {
   //console.log(response);
   cityName = response.data.location.name;
   document.querySelector("#city").innerHTML = `${cityName}`;
-  let lat = response.data.location.lat;
-  let lon = response.data.location.lon;
+  lat = response.data.location.lat;
+  long = response.data.location.lon;
   let apiKeyTZ = "3ae99f7a70154b41a980cb925a17a548";
 
   fTemp = Math.round(response.data.current.temp_f);
 
   axios
     .get(
-      `https://timezone.abstractapi.com/v1/current_time/?api_key=${apiKeyTZ}&location=${lat},${lon}`
+      `https://timezone.abstractapi.com/v1/current_time/?api_key=${apiKeyTZ}&location=${lat},${long}`
     )
     .then(dateTime);
 
@@ -133,8 +165,7 @@ function showWeatherInfo(response) {
   let tempElement = document.querySelector("#currTemp");
   tempElement.innerHTML = `${temperature}`;
 
-  let apiKey = "eb3465c9163b23fae63aa1202c8a0eb5";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKeyOpen}&units=imperial`;
 
   let wdescription = response.data.current.condition.text;
   document.querySelector("#weather-description").innerHTML = `${wdescription}`;
@@ -162,9 +193,13 @@ function showWeatherInfo(response) {
   document.querySelector("#humidity").innerHTML = "HUMIDITY";
   showIcons();
 
-  let apiOneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+  let unitType = "imperial";
 
-  axios.get(`${apiOneCallUrl}`).then(displayForecast);
+  axios
+    .get(
+      `${apiOneCallUrl}lat=${lat}&lon=${long}&appid=${apiKeyOpen}&units=${unitType}`
+    )
+    .then(displayForecast);
 }
 
 function showIcons() {
@@ -193,6 +228,15 @@ function showCelsius(event) {
   let celTemp = Math.round((fTemp - 32) / 1.8);
   document.querySelector("#currTemp").innerHTML = celTemp;
   document.querySelector("#unit-type").innerHTML = "C";
+  document.querySelector("#real-feel").innerHTML = Math.round(
+    (rfeel - 32) / 1.8
+  );
+  document.querySelector("#rf").innerHTML = "°C";
+  axios
+    .get(
+      `${apiOneCallUrl}lat=${lat}&lon=${long}&appid=${apiKeyOpen}&units=metric`
+    )
+    .then(displayForecast);
 }
 
 let clink = document.querySelector("#clink");
@@ -204,9 +248,17 @@ function showFahrenheit(event) {
   clink.classList.remove("active");
   document.querySelector("#currTemp").innerHTML = fTemp;
   document.querySelector("#unit-type").innerHTML = "F";
+  document.querySelector("#real-feel").innerHTML = `${rfeel}`;
+  document.querySelector("#rf").innerHTML = "°F";
+  axios
+    .get(
+      `${apiOneCallUrl}lat=${lat}&lon=${long}&appid=${apiKeyOpen}&units=imperial`
+    )
+    .then(displayForecast);
 }
 
 let flink = document.querySelector("#flink");
 flink.addEventListener("click", showFahrenheit);
 
 let fTemp = null;
+let rfeel = null;
