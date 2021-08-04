@@ -70,8 +70,9 @@ function realFeel(response) {
   document.querySelector("#realfeel").innerHTML = "REAL FEEL";
 }
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
+function displayForecast(response) {
+  console.log(response);
+  /*let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="forecastTitle">4-Day Forecast
   </div><div class="row">`;
@@ -93,7 +94,7 @@ function displayForecast() {
   });
 
   forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
+  forecastElement.innerHTML = forecastHTML;*/
 }
 
 function showWeatherInfo(response) {
@@ -145,7 +146,9 @@ function showWeatherInfo(response) {
   document.querySelector("#humidity").innerHTML = "HUMIDITY";
   showIcons();
 
-  displayForecast();
+  let apiOneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+
+  axios.get(`${apiOneCallUrl}`).then(displayForecast);
 }
 
 function showIcons() {
