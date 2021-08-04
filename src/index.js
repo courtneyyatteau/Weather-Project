@@ -70,31 +70,47 @@ function realFeel(response) {
   document.querySelector("#realfeel").innerHTML = "REAL FEEL";
 }
 
-function displayForecast(response) {
-  console.log(response);
-  /*let forecastElement = document.querySelector("#forecast");
+function formatDay(dayUnformatted) {
+  let date = new Date(dayUnformatted * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"];
+  return days[day];
+}
 
-  let forecastHTML = `<div class="forecastTitle">4-Day Forecast
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="forecastTitle">6-Day Forecast
   </div><div class="row">`;
 
-  let days = ["Wed", "Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-3 dayOne">
-      <span class="forecastDay" id="dayOneWords">${day}</span>
-      <div>
-        <img class="forecastImg" src="http://openweathermap.org/img/wn/01d@2x.png" alt="sun" id="dayOneImg">
-      </div>
-      <div class="forecastTemps">
-        <span class="forecastHigh" id="dayTwoLo">82°▲</span>
-        <span class="forecastLow" id="dayOneLo"> 71°▼</span>
-      </div>
-    </div>`;
+  forecast.forEach(function (forecastDay, i) {
+    if (i < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2 dayOne">
+        <span class="forecastDay" id="dayOneWords">${formatDay(
+          forecastDay.dt
+        )}</span>
+        <div>
+          <img class="forecastImg" src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png" alt="sun" id="dayOneImg">
+        </div>
+        <div class="forecastTemps">
+          <span class="forecastHigh" id="dayTwoLo">${Math.round(
+            forecastDay.temp.max
+          )}°▲</span>
+          <span class="forecastLow" id="dayOneLo"> ${Math.round(
+            forecastDay.temp.min
+          )}°▼</span>
+        </div>
+      </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;*/
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function showWeatherInfo(response) {
