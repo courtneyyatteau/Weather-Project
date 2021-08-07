@@ -50,6 +50,37 @@ ul {
   padding-right: 0;
 }
 
+@media (max-width: 750px) {
+  .s-btn {
+    margin-left: -7px;
+    font-size: 14px;
+    padding: 6px;
+  }
+  .locate-btn {
+    margin-left: -8px;
+    padding: 6px;
+    font-size: 14px;
+  }
+  .second-row .dateTime {
+    position: relative;
+    margin-left: 10px;
+    list-style: none;
+    font-size: 12px;
+  }
+  .wspec-img {
+    font-size: 10px;
+  }
+  #realfeel,
+  #wind,
+  #humidity,
+  #pr {
+    font-size: 8px;
+  }
+  #city {
+    font-size: 30px;
+  }
+}
+
 .s-btn {
   margin-left: -7px;
 }
@@ -90,7 +121,7 @@ ul {
 
 .city {
   color: rgb(18, 18, 143);
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 100;
   margin-bottom: 20px;
 }
@@ -107,7 +138,7 @@ ul {
 
 .temperature {
   color: rgb(33, 33, 33);
-  font-size: 78px;
+  font-size: 60px;
   font-weight: 400;
   text-align: left;
   margin-left: 0px;
@@ -116,15 +147,15 @@ ul {
 
 .temperature .unit {
   position: relative;
-  font-size: 35px;
+  font-size: 28px;
   top: -28px;
-  left: -20px;
+  left: -24px;
 }
 
 .temperature .unitType {
   position: relative;
   left: -41px;
-  font-size: 35px;
+  font-size: 28px;
   top: -28px;
 }
 
@@ -172,6 +203,7 @@ ul {
   margin-top: 30px;
   text-align: center;
   font-size: 13px;
+  margin-right: 10px;
 }
 
 .forecastTitle {
