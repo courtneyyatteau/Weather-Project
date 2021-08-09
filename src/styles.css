@@ -50,7 +50,7 @@ ul {
   padding-right: 0;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 400px) {
   .s-btn {
     margin-left: -7px;
     font-size: 14px;
@@ -149,12 +149,12 @@ ul {
   position: relative;
   font-size: 28px;
   top: -28px;
-  left: -24px;
+  left: -14px;
 }
 
 .temperature .unitType {
   position: relative;
-  left: -41px;
+  left: -30px;
   font-size: 28px;
   top: -28px;
 }
