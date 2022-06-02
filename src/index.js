@@ -118,29 +118,6 @@ function displayForecast(response) {
       `;
   }
 
-  /*forecast.forEach(function (forecastDay, i) {
-    if (i < 6) {
-      forecastHigh = Math.round(forecastDay.temp.max);
-      forecastLow = Math.round(forecastDay.temp.min);
-      forecastHTML =
-        forecastHTML +
-        `<div class="col-2 dayOne">
-          <span class="forecastDay" id="dayOneWords">${formatDay(
-            forecastDay.dt
-          )}</span>
-          <div>
-            <img class="forecastImg" src="http://openweathermap.org/img/wn/${
-              forecastDay.weather[0].icon
-            }@2x.png" alt="sun" id="dayOneImg">
-          </div>
-          <div class="forecastTemps">
-            <span class="forecastHigh" id="dayOneHi">${forecastHigh}</span><span>°▲</span>
-            <span class="forecastLow" id="dayOneLo"> ${forecastLow}</span><span>°▼</span>
-          </div>
-        </div>`;
-    }
-  });*/
-
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
